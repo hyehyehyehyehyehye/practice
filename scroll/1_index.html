@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        svg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin-top: -50px;
+            margin-left: -50px;
+
+            animation: rotate 1s linear infinite;
+            animation-play-state: paused;
+            animation-delay: calc(var(--scroll) * -1s);
+
+            animation-iteration-count: 1;
+            animation-fill-mode: both;
+        }
+
+        @keyframes rotate {
+            to {
+                transform: rotate(360deg);
+                scale: 2;
+            }
+        }
+
+        body {
+            min-height: 500vh;
+        }
+
+        p {
+            line-height: 1.45;
+        }
+
+        span {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <svg width="100" height="100" viewBox="0 0 24 24">
+        <path
+            d="M21,9H15V22H13V16H11V22H9V9H3V7H21M12,2A2,2 0 0,1 14,4A2,2 0 0,1 12,6C10.89,6 10,5.1 10,4C10,2.89 10.89,2 12,2Z" />
+    </svg>
+    <p>
+        해당 JavaScript 코드는 scroll 이벤트를 감지하여 스크롤이 발생할 때마다 실행되는 함수를 등록하는 역할을 합니다.
+        <br>
+
+        이 코드는 window.addEventListener() 함수를 사용하여 scroll 이벤트를 등록하고, 이벤트가 발생할 때마다 콜백 함수가 실행됩니다. 콜백 함수는 화살표 함수(() => { ...
+        })로 작성되어 있습니다.
+        <br>
+
+        콜백 함수 내부에서는 <span>document.body.style.setProperty()</span> 메서드를 사용하여 CSS 변수인 <span>--scroll의 값을 동적으로 변경</span>하고
+        있습니다.
+        <span>window.pageYOffset은 현재 스크롤의 수직 위치를 나타내는 값</span>이며, d<span>
+            ocument.body.offsetHeight - window.innerHeight는 스크롤
+            가능한 전체 높이와 현재 보이는 창의 높이의 차이
+        </span>를 나타냅니다.
+        <br>
+
+        위의 계산식을 통해 스크롤 위치에 따라 <span>window.pageYOffset 값을 전체 높이와 창의 높이의 비율로 변환하여 --scroll 변수에 할당</span>하고 있습니다. 이렇게 설정된
+        --scroll 변수는
+        CSS 코드에서 사용되어 애니메이션의 지연 시간을 조정하는 데 활용됩니다.
+
+        즉, 스크롤이 발생할 때마다 --scroll 변수의 값을 업데이트하여 애니메이션에 동적인 효과를 부여하는 것입니다.
+    </p>
+    <script>
+        window.addEventListener("scroll", () => {
+            document.body.style.setProperty("--scroll", window.pageYOffset / (document.body.offsetHeight - window.innerHeight)
+            );
+        },
+            false
+        );
+    </script>
+</body>
+</html>

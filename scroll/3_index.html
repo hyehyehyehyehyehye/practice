@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background: #131316;
+            color: #fff;
+            padding: 0;
+            margin: 0;
+        }
+
+        section {
+            display: grid;
+            place-items: center;
+            align-content: center;
+            min-height: 100vh;
+        }
+
+        .hidden {
+            opacity: 0;
+            filter: blur(5px);
+            transform: translateX(-100%);
+            transition: all 1s;
+        }
+
+        @media (prefers-reduced-motion) {
+            .hidden {
+                transition: none;
+            }
+
+        }
+
+        .show {
+            opacity: 1;
+            filter: blur(0);
+            transform: translateX(0);
+        }
+
+        .logos {
+            display: flex;
+            gap: 30px;
+        }
+
+        .logo {
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .logo:nth-child(2) {
+            transition-delay: .6s;
+        }
+
+        .logo:nth-child(3) {
+            transition-delay: 1s;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hellow World</h1>
+    <section class="hidden">
+        <h1>Hi Mom</h1>
+        <p>This is my Website</p>
+    </section>
+    <section class="hidden">
+        <h1>Buy my product</h1>
+        <p>The things you own end up owning you.
+            It's only after you lose everything that you're free to do anything
+        </p>
+    </section>
+    <section class="hidden">
+        <h2>It's really good</h2>
+        <div class="logos">
+            <div class="logo hidden">
+                <img src="./img/1.png" alt="">
+            </div>
+            <div class="logo hidden">
+                <img src="./img/2.png" alt="">
+            </div>
+            <div class="logo hidden">
+                <img src="./img/3.png" alt="">
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show')
+                }
+                else {
+                    entry.target.classList.remove('show')
+                }
+            })
+        })
+        const hiddenEl = document.querySelectorAll('.hidden')
+        hiddenEl.forEach((el) => observer.observe(el)) 
+    </script>
+</body>
+</html>

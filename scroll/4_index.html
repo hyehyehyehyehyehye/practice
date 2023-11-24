@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            font-weight: 300;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            margin: 10px;
+        }
+
+        .box {
+            background-color: white;
+            border: 2px solid #3b3b3b;
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 400px;
+            height: 200px;
+            margin: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 60px 40px -7px rgba(0, 0, 0, .2);
+            transform: translateX(400%);
+            transition: transform .4s ease;
+        }
+
+        .box:nth-of-type(even) {
+            transform: translateX(-400%);
+        }
+
+        .box.show {
+            transform: translateX(0);
+        }
+
+        .box h2 {
+            font-size: 22px;
+            font-weight: 400;
+        }
+
+        p {
+            font-family: sans-serif;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Animation on scroll</h1>
+    <p>해당 JavaScript 코드는 스크롤 이벤트를 감지하여 화면에 특정 박스 요소들을 보여주거나 숨기는 역할을 합니다. <br>
+
+        먼저, const boxes = document.querySelectorAll('.box')는 CSS 클래스 이름이 "box"인 모든 요소들을 선택하여 boxes 변수에 저장합니다.
+        <br>
+
+        이후,window.addEventListener('scroll', checkBoxes)를 사용하여 스크롤 이벤트가 발생할 때마다 checkBoxes 함수가 실행되도록 등록합니다.
+        <br>
+
+        그리고 checkBoxes() 함수를 호출하여 초기 상태에서도 박스 요소들의 가시성을 설정합니다.
+        <br>
+
+        checkBoxes() 함수 내부에서는 화면의 높이(window.innerHeight)의 4/5 지점을 triggerBottom 변수에 저장합니다. 이 값을 기준으로 각 박스 요소의 위치를
+        계산하고,<br>
+        해당 위치가 triggerBottom보다 작으면 "show" 클래스를 추가하여 박스를 보여주고, 그렇지 않으면 "show" 클래스를 제거하여 박스를 숨깁니다.<br>
+
+        즉, 스크롤 이벤트가 발생할 때마다 박스 요소들의 위치를 계산하여 화면에 보여주거나 숨기는 것입니다. 이를 통해 스크롤에 따라 박스 요소들이 나타나거나 사라지는 효과를 줄 수 있습니다.
+
+        추가로 궁금한 점이 있으면 알려주세요.
+    </p>
+    <br><br>
+    <div class="box">
+        <h2>HTML</h2>
+    </div>
+    <div class="box">
+        <h2>CSS</h2>
+    </div>
+    <div class="box">
+        <h2>JAVASCRIPT</h2>
+    </div>
+    <div class="box">
+        <h2>JQUERY</h2>
+    </div>
+    <div class="box">
+        <h2>RESPONSIVE</h2>
+    </div>
+    <div class="box">
+        <h2>SEO OPTIMIZED</h2>
+    </div>
+    <div class="box">
+        <h2>RESPONSIVE</h2>
+    </div>
+    <div class="box">
+        <h2>WORDPRESS</h2>
+    </div>
+    <div class="box">
+        <h2>SUPPORTS</h2>
+    </div>
+    <div class="box">
+        <h2>DEVELOPMENT</h2>
+    </div>
+    <div class="box">
+        <h2>MOBILE SUPPORTS</h2>
+    </div>
+    <div class="box">
+        <h2>CONTENT</h2>
+    </div>
+
+
+    <script>
+        const boxes = document.querySelectorAll('.box')
+        window.addEventListener('scroll', checkBoxes)
+        checkBoxes()
+        function checkBoxes() {
+            const triggerBottom = window.innerHeight / 5 * 4
+            boxes.forEach(box => {
+                const boxTop = box.getBoundingClientRect().top
+                if (boxTop < triggerBottom) {
+                    box.classList.add('show')
+                } else {
+                    box.classList.remove('show')
+                }
+            })
+        }
+    </script>
+</body>
+</html>
