@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            font: 맑은고딕;
+            text-decoration: none;
+            letter-spacing: 0px;
+        }
+
+        html {
+            height: 100%;
+        }
+
+        .wrap {
+            width: 100%;
+            font-size: 14px;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .menubar {
+            width: 1024px;
+            margin: 0 auto;
+            border: none;
+            /* overflow: hidden; */
+            position: relative;
+        }
+
+        .menuLogo {
+            width: 100px;
+            position: absolute;
+        }
+
+        .menuItem {
+            display: flex;
+        }
+
+        .menubar ul {
+            background: #1D375F;
+            height: 50px;
+            list-style: none;
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .menubar a {
+            color: #FFFFFF;
+            display: block;
+            font-weight: normal;
+            line-height: 49px;
+            padding: 1px 25px;
+            text-align: center;
+        }
+
+        .menubar li a:hover,
+        .menubar ul li:hover a {
+            background: #636363;
+            color: #FFFFFF;
+        }
+
+        .menubar li:hover ul {
+            display: block;
+        }
+
+        .menubar li:hover li a {
+            background: none;
+        }
+
+        .menubar li ul {
+            background: #1D375F;
+            display: none;
+            height: auto;
+            position: absolute;
+            top: 50px;
+            z-index: 999;
+        }
+
+        .menubar li li a,
+        .menubar li li {
+            background: #1D375F;
+            display: block;
+            float: none;
+            min-width: 135px;
+        }
+
+        .menubar li ul a {
+            display: block;
+            height: 50px;
+            font-size: 12px;
+            font-style: normal;
+            padding: 0px 10px 0px 15px;
+            text-align: left;
+        }
+
+        .menubar li ul a:hover,
+        .menubar li ul li:hover a {
+            background: #636363;
+            border: 0px;
+            color: #ffffff;
+        }
+
+        .img {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="menubar">
+            <div class="menuLogo">
+                <a href="#">Logo</a>
+            </div>
+            <ul class="menuItem">
+                <li><a href="#">Home</a>
+                    <ul>
+                        <li><a href="#">SubMenu01</a></li>
+                        <li><a href="#">SubMenu02</a></li>
+                        <li><a href="#">SubMenu03</a></li>
+                        <li><a href="#">SubMenu04</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">MainMenu01</a>
+                    <ul>
+                        <li><a href="#">SubMenu01</a></li>
+                        <li><a href="#">SubMenu02</a></li>
+                        <li><a href="#">SubMenu03</a></li>
+                        <li><a href="#">SubMenu04</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#">MainMenu02</a>
+                    <ul>
+                        <li><a href="#">SubMenu01</a></li>
+                        <li><a href="#">SubMenu02</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">LogOut</a>
+                    <ul>
+                        <li><a href="#">SubMenu01</a></li>
+                        <li><a href="#">SubMenu02</a></li>
+                        <li><a href="#">SubMenu03</a></li>
+                        <li><a href="#">SubMenu04</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
