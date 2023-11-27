@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-decoration: none;
+            color: #000;
+        }
+
+        .navi {
+            display: flex;
+            justify-content: center;
+            background-color: aliceblue;
+            height: 60px;
+            position: relative;
+        }
+
+
+        .navi>li {
+            text-align: center;
+        }
+
+        .navi>li>a {
+            display: block;
+            padding: 20px 30px;
+        }
+
+        .navi>li ul {
+            padding-top: 20px;
+            height: 0;
+            opacity: 0;
+            background-color: antiquewhite
+        }
+
+        .navi>li ul li {
+            padding: 20px 30px;
+        }
+
+        /* 
+        .navi:hover>li ul {
+            height: 100%;
+            opacity: 1;
+            transition: all .5s;
+        } */
+    </style>
+</head>
+<body>
+    <h1>네비게이션 바</h1>
+
+    <ul class="navi">
+        <li><a href="#">Home</a>
+            <ul>
+                <li><a href="#">웹디자인</a></li>
+                <li><a href="#">HTML5</a></li>
+                <li><a href="#">JQuery</a></li>
+                <li><a href="#">웹+ 모바일</a></li>
+            </ul>
+        </li>
+        <li><a href="#">웹개발</a>
+            <ul>
+                <li><a href="#">웹디자인</a></li>
+                <li><a href="#">HTML5</a></li>
+                <li><a href="#">JQuery</a></li>
+                <li><a href="#">웹+ 모바일</a></li>
+            </ul>
+        </li>
+        <li><a href="#">게시판</a>
+            <ul>
+                <li><a href="#">Q & A</a></li>
+                <li><a href="#">방명록</a></li>
+            </ul>
+        </li>
+        <li><a href="#">프로필</a>
+            <ul>
+                <li><a href="#">웹디자인</a></li>
+                <li><a href="#">HTML5</a></li>
+                <li><a href="#">JQuery</a></li>
+                <li><a href="#">웹+ 모바일</a></li>
+            </ul>
+        </li>
+    </ul>
+</body>
+
+<script>
+    const navi = document.querySelector('.navi');
+    const naviItems = document.querySelectorAll('.navi > li');
+
+    naviItems.forEach(item => {
+        const link = item.querySelector('a');
+        const submenu = item.querySelector('ul');
+
+        // 메뉴에 마우스 호버 시 서브메뉴 표시
+        item.addEventListener('mouseover', () => {
+            submenu.style.height = 'auto';
+            submenu.style.opacity = '1';
+        });
+
+        // 메뉴에서 마우스가 벗어나면 서브메뉴 숨김
+        item.addEventListener('mouseout', () => {
+            submenu.style.height = '0';
+            submenu.style.opacity = '0';
+        });
+    });
+</script>
+</html>
