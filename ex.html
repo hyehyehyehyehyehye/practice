@@ -1,0 +1,1587 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @charset "UTF-8";
+
+        /* 폰트 적용 (선택사항) */
+        @font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        html,
+        body {
+            font-family: "GmarketSansMedium", sans-serif;
+        }
+
+        /* Reset */
+        html,
+        body,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        div,
+        p,
+        blockquote,
+        pre,
+        code,
+        address,
+        ul,
+        ol,
+        li,
+        menu,
+        nav,
+        section,
+        article,
+        aside,
+        dl,
+        dt,
+        dd,
+        table,
+        thead,
+        tbody,
+        tfoot,
+        label,
+        caption,
+        th,
+        td,
+        form,
+        fieldset,
+        legend,
+        hr,
+        input,
+        button,
+        textarea,
+        object,
+        figure,
+        figcaption {
+            margin: 0;
+            padding: 0;
+        }
+
+        main,
+        header,
+        section,
+        nav,
+        footer,
+        aside,
+        article,
+        figure {
+            display: block;
+        }
+
+        html {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        html,
+        body {
+            overflow-x: hidden;
+            /* 반응형 */
+        }
+
+        ul,
+        ol,
+        li {
+            list-style: none;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        strong,
+        th {
+            font-weight: normal;
+            font-family: inherit;
+            color: inherit;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+            outline: none;
+        }
+
+        input,
+        button,
+        select,
+        fieldset,
+        textarea {
+            -webkit-border-radius: 0;
+            border-radius: 0;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 0;
+            background-color: transparent;
+        }
+
+        .blind,
+        legend {
+            overflow: hidden;
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            font-size: 12px;
+            clip: rect(1px, 1px, 1px, 1px);
+        }
+
+        button {
+            cursor: pointer;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        i,
+        em {
+            font-style: normal;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* content */
+        body {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 5%;
+            background-color: #f1f2f5;
+        }
+
+        h1.h1 {
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .wrap {
+            max-width: 1000px;
+            width: 100%;
+            border-radius: 10px;
+            background: #fff;
+            box-shadow: 20px 20px 60px #cecece, -20px -20px 60px #ffffff;
+            overflow: hidden;
+        }
+
+        .accordion-list .accordion-item {
+            border-bottom: 1px solid #ddd;
+        }
+
+        .accordion-list .accordion-item .item-button {
+            display: block;
+            position: relative;
+            padding: 25px 20px;
+            transition: all 0.3s;
+        }
+
+        .accordion-list .accordion-item.active .item-button {
+            background-color: #fff;
+        }
+
+        .accordion-list .accordion-item .item-button::after {
+            content: "\e941";
+            display: inline-block;
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            font-family: xeicon;
+            font-weight: bold;
+            color: #666;
+            transition: all 0.3s;
+        }
+
+        .accordion-list .accordion-item.active .item-button::after {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .accordion-list .accordion-item .accordion-name {
+            position: relative;
+            width: calc(100% - 50px);
+            padding-left: 30px;
+            font-size: 17px;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .accordion-list .accordion-item .accordion-name .icon {
+            display: inline-block;
+            position: absolute;
+            top: -4px;
+            left: 0;
+            font-size: 24px;
+            color: #999;
+            transition: all 0.3s;
+        }
+
+        .accordion-list .accordion-item.active .accordion-name .icon {
+            color: #000;
+        }
+
+        .accordion-list .accordion-item .accordion-desc {
+            display: none;
+            padding: 30px;
+            background-color: #fafafa;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .desc-title {
+            display: block;
+            position: relative;
+            margin-bottom: 10px;
+            padding-left: 12px;
+            font-size: 15px;
+            font-weight: bold;
+            color: #555;
+            line-height: 1;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .desc-title::before {
+            content: "";
+            display: inline-block;
+            position: absolute;
+            top: 4px;
+            left: 0;
+            width: 5px;
+            height: 5px;
+            border-radius: 50%;
+            background-color: #666;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .desc-title:not(:first-child) {
+            margin-top: 25px;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .list-1st li {
+            position: relative;
+            padding-left: 15px;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .list-1st li::before {
+            content: "\e93f";
+            display: inline-block;
+            position: absolute;
+            top: 4px;
+            left: 0;
+            font-family: xeicon;
+            font-size: 15px;
+            color: #666;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .list-1st li:not(:last-child) {
+            margin-bottom: 5px;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .list-1st li .link {
+            color: #999;
+            transition: all 0.3s;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .list-1st li .link:hover {
+            color: #000;
+        }
+
+        .accordion-list .accordion-item .accordion-desc .list-1st li .link i {
+            position: relative;
+            top: 1px;
+        }
+
+        @media (max-width:767px) {
+            .accordion-list .accordion-item .accordion-desc {
+                padding: 20px 25px;
+            }
+        }
+
+        @media (max-width:500px) {
+            .accordion-list .accordion-item .item-button {
+                padding: 20px 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <h1 class="h1">코드 저장소</h1>
+    <div class="wrap">
+        <ul class="accordion-list">
+            <li class="accordion-item">
+                <a href="#" class="item-button">
+                    <span class="accordion-name"><i class="xi-apps icon"></i> HTML / CSS</span>
+                </a>
+                <div class="accordion-desc">
+                    <strong class="desc-title">HTML 관련</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://www.tablesgenerator.com/html_tables" class="link" target="_blank"
+                                title="새창열림">
+                                html 테이블 생성 사이트
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://divtable.com/generator/" class="link" target="_blank" title="새창열림">
+                                html 테이블 생성 사이트 2 (위에가 안되는 경우에 사용)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://kor.pe.kr/util/4/charmap2.htm" class="link" target="_blank" title="새창열림">
+                                html 특수문자 리스트
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://viaeoo.tistory.com/11" class="link" target="_blank" title="새창열림">
+                                head 태그에 대한 전반적인 설명
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.w3bai.com/ko/tags/ref_language_codes.html#gsc.tab=0" class="link"
+                                target="_blank" title="새창열림">
+                                html 언어 참조
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">CSS 관련</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://tinytools.design/easing" class="link" target="_blank" title="새창열림">
+                                css 속도표현 참고 1
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://animista.net/" class="link" target="_blank" title="새창열림">
+                                css 속도표현 참고 2
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.roblaplaca.com/examples/bezierBuilder/#" class="link" target="_blank"
+                                title="새창열림">
+                                css 속도표현 참고 3
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://cubic-bezier.com/#.17,.67,.83,.67" class="link" target="_blank"
+                                title="새창열림">
+                                css 속도표현 참고 4
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://lifenourish.tistory.com/843" class="link" target="_blank" title="새창열림">
+                                css 형광펜 밑줄효과
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://fromnowwon.tistory.com/entry/css-triangle-bubble" class="link"
+                                target="_blank" title="새창열림">
+                                css 삼각형 만들기
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://neumorphism.io/#ebebeb" class="link" target="_blank" title="새창열림">
+                                css 뉴모피즘 그림자 효과
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://cssgradient.io/" class="link" target="_blank" title="새창열림">
+                                css 그라디언트 추출
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/WNzXbNV" class="link" target="_blank"
+                                title="새창열림">
+                                css 글자 테두리 선 만들기 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/ZEYXLqZ" class="link" target="_blank"
+                                title="새창열림">
+                                css 백그라운드 이미지 반응형 비율대로 축소 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/wvagYQa" class="link" target="_blank"
+                                title="새창열림">
+                                css 스크롤바 커스텀 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/RwPaNXr" class="link" target="_blank"
+                                title="새창열림">
+                                css 백그라운드 사이즈 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/qBbPJez" class="link" target="_blank"
+                                title="새창열림">
+                                아이프레임 사이즈 비율별 css (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/ZEGLNbW" class="link" target="_blank"
+                                title="새창열림">
+                                css 로딩효과 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/JjmWamg" class="link" target="_blank"
+                                title="새창열림">
+                                css 로딩효과 2 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/WNzXbNV" class="link" target="_blank"
+                                title="새창열림">
+                                텍스트 글자에 테두리 선 주기 (font-stroke & font-shadow) (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/QWYRJQy" class="link" target="_blank"
+                                title="새창열림">
+                                CSS Clip Path 애니메이션 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">HTML &amp; CSS</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/qBBzOpe" class="link" target="_blank"
+                                title="새창열림">
+                                작업 시작시 reset 소스 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/mdXBROV" class="link" target="_blank"
+                                title="새창열림">
+                                웹접근성 준수 자막 예시 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">기타</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://www.diffchecker.com/" class="link" target="_blank" title="새창열림">
+                                소스코드 비교
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://maschek.hu/imagemap/imgmap/" class="link" target="_blank" title="새창열림">
+                                이미지맵 추출
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://yoksel.github.io/url-encoder/" class="link" target="_blank" title="새창열림">
+                                svg 추출
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.favicon-generator.org/" class="link" target="_blank" title="새창열림">
+                                favicon 제작
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">Sass[SCSS]</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://to2.kr/eka" class="link" target="_blank" title="새창열림">
+                                직접 정리한 Sass[SCSS]
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="accordion-item">
+                <a href="#" class="item-button">
+                    <span class="accordion-name"><i class="xi-apps icon"></i>JS 스크롤</span>
+                </a>
+                <div class="accordion-desc">
+                    <strong class="desc-title">GSAP</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://productive-printer-b81.notion.site/GSAP-Basic-4c37387fe8254db4a7d14c883f8baa2d"
+                                class="link" target="_blank" title="새창열림">
+                                GSAP BASIC (Notion)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/GreenSock/collections/" class="link" target="_blank"
+                                title="새창열림">
+                                GSAP 예제모음 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">GSAP 스크롤트리거</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://velog.io/@yesslkim94/GSAP-ScrollTrigger" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 이해를 위한 전반적인 설명글 1
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://medium.com/@alice/gsap-scrolltrigger-%ED%94%8C%EB%9F%AC%EA%B7%B8%EC%9D%B8-%EA%B3%B5%EA%B0%9C-f61f7bf2f106"
+                                class="link" target="_blank" title="새창열림">
+                                스크롤트리거 이해를 위한 전반적인 설명글 2
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://agal.tistory.com/213" class="link" target="_blank" title="새창열림">
+                                스크롤트리거 이해를 위한 전반적인 설명글 3
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/ZEQRbEG" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 기초 데모 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/KKQjMZE" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 가로 스크롤 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/WNgWRjY" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 가로 스크롤 2 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/eYPVVPv" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 가로 스크롤 3 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/OJBQZvQ" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 + 부드러운 스크롤 1 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/PoyQeaQ" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 + 부드러운 스크롤 2 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/eYQoMLx" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 예제 + 부드러운 스크롤 (ScrollTrigger Smooth Scroll (locomotive-scroll) )
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cbnuh.or.kr/main/sub05_01.do" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 실전 예제 1
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.yesan.go.kr/chusa/sub01_01.do" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 실전 예제 2
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://chuncheon.museum.go.kr/kor/sub01_0101.do" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 실전 예제 3
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cnuh.co.kr/history/index.do" class="link" target="_blank" title="새창열림">
+                                스크롤트리거 실전 예제 4
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://chuncheon.museum.go.kr/kor/sub01_0101.do" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤트리거 실전 예제 5 [심화]
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.coleomarketing.com/" class="link" target="_blank" title="새창열림">
+                                스크롤트리거 실전 예제 6 [심화]
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">GSAP 스크롤매직</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/povQPJj" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤매직 데모 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/gObQXXw" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤매직 예제 1 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/NWPeKmx" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤매직 예제 2 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/LYVXyQY" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤매직 예제 3 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">원페이지 스크롤</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://github.com/alvarotrigo/fullPage.js/tree/2.9.7" class="link" target="_blank"
+                                title="새창열림">
+                                fullpage.js 사용법
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/wvXgGXR" class="link" target="_blank"
+                                title="새창열림">
+                                fullpage.js 데모 커스텀 [코드펜]
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.seogu.go.kr/html/tour/sub01/travel_01.html" class="link"
+                                target="_blank" title="새창열림">
+                                Pageable.js 실전 예제 1
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://projects.lukehaas.me/scrollify/" class="link" target="_blank" title="새창열림">
+                                Scrollify 사용법
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/rNNEgGj" class="link" target="_blank"
+                                title="새창열림">
+                                Scrollify 데모 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/YzPbMGR" class="link" target="_blank"
+                                title="새창열림">
+                                Scrollify 헤더, 푸터 적용 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/VwYOWry" class="link" target="_blank"
+                                title="새창열림">
+                                Scrollify 응용 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">스크롤 애니메이션</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/QWxMYwE" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤 애니메이션 커스텀 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://michalsnik.github.io/aos/" class="link" target="_blank" title="새창열림">
+                                Animation On Scroll (AOS)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.sorokdo.go.kr/museum/vr/exhibition/special_exhibition.html" class="link"
+                                target="_blank" title="새창열림">
+                                Skrollr.js 실전 예제
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">기타</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/MWzMjZM" class="link" target="_blank"
+                                title="새창열림">
+                                부드러운 스크롤바 (Locomotive-scroll.js) (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/wvagQZP" class="link" target="_blank"
+                                title="새창열림">
+                                jQuery mCustomScrollbar (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/NWyZWze" class="link" target="_blank"
+                                title="새창열림">
+                                jQuery NiceScroll (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/GRGBOPB" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤이 요소 끝에 닿을 경우 계산 [가로&amp;세로] (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/wvyeBbK" class="link" target="_blank"
+                                title="새창열림">
+                                Sticky 기능 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/LYGMXYM" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤 맨 아래 도달 확인 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/ExaoBMO" class="link" target="_blank"
+                                title="새창열림">
+                                따라다니는 퀵메뉴 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/VwQrYKm" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤 위치에 따른 게이지바 인디케이터 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/rNrdooe" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤에 따른 페이지 메뉴 활성화 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://bike.tashu.or.kr/main.do" class="link" target="_blank" title="새창열림">
+                                스크롤 메뉴 페이지 실전 예제
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/zYyXzdB" class="link" target="_blank"
+                                title="새창열림">
+                                스크롤 시, 화면에 보여지는 요소에 클래스 추가
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="accordion-item">
+                <a href="#" class="item-button">
+                    <span class="accordion-name"><i class="xi-apps icon"></i>JS 슬라이드</span>
+                </a>
+                <div class="accordion-desc">
+                    <strong class="desc-title">Slick 슬라이드</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/mdJRVwX" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 기본 margin 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/QWQNrdJ" class="link" target="_blank"
+                                title="새창열림">
+                                Slick current 투명도 활성화 기본 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/mdJbWep" class="link" target="_blank"
+                                title="새창열림">
+                                Slick nav + slickGoTo 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/vYOoBWJ" class="link" target="_blank"
+                                title="새창열림">
+                                Slick nav 세로 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/qBdWMwV" class="link" target="_blank"
+                                title="새창열림">
+                                Slick nav + customPaging 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/yLqvKvG" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 페이지 표시 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/xxGGKWL" class="link" target="_blank"
+                                title="새창열림">
+                                Slick centermode 예제 1 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/BaNpRzg" class="link" target="_blank"
+                                title="새창열림">
+                                Slick centermode 예제 2 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/RwPomGv" class="link" target="_blank"
+                                title="새창열림">
+                                Slick transition 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/bGdBJOy" class="link" target="_blank"
+                                title="새창열림">
+                                Slick animation 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/vYOBgoJ" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 심화 응용 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/ZEGMMzy" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 슬라이드 안에 슬라이드 예제 1 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/rNGQbOZ" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 슬라이드 안에 슬라이드 예제 2 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/xxXQero" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 슬라이드 안에 슬라이드 예제 3 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/jOPerPR" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 탭메뉴 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/eYKEXXO" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 슬라이드 필터 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/yLzyVmG" class="link" target="_blank"
+                                title="새창열림">
+                                Slick arrow 내부 텍스트 변경 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/ExReqVy" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 재생/정지 게이지바, 다중 슬라이드 연결 심화 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cbnuh.or.kr/fund/" class="link" target="_blank" title="새창열림">
+                                Slick 실전 예제 1
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://baekje.acego.net//kor/html/sub04/040601.html" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 실전 예제 2
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.gyeryong.go.kr/tour/html/sub04/040101.html" class="link"
+                                target="_blank" title="새창열림">
+                                Slick 실전 예제 3
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.kipf.re.kr/30th/Info_History.do" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 실전 예제 4
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.kipf.re.kr/30th/Anniversary_Message.do" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 실전 예제 5
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.cbnuh.or.kr/main/index.do" class="link" target="_blank" title="새창열림">
+                                Slick 실전 예제 6
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.sunykorea.ac.kr/en/" class="link" target="_blank" title="새창열림">
+                                Slick 실전 예제 7
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.yesan.go.kr/ybgm/sub02_01.do" class="link" target="_blank" title="새창열림">
+                                Slick 실전 예제 8
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://daegu.museum.go.kr/kor/sub01_02_01.do" class="link" target="_blank"
+                                title="새창열림">
+                                Slick 실전 예제 9
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">Swiper 슬라이드</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/VwMVobL" class="link" target="_blank"
+                                title="새창열림">
+                                Swiper 좌우 텍스트 변경 [loop] (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/mdBajQZ" class="link" target="_blank"
+                                title="새창열림">
+                                Swiper 좌우 텍스트 변경 [not loop] (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/XWeOgBa" class="link" target="_blank"
+                                title="새창열림">
+                                Swiper Thumbs Gallery centerSlides 적용 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/oNdpWWx" class="link" target="_blank"
+                                title="새창열림">
+                                Swiper Parallax 효과 응용 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/Vwxybmj" class="link" target="_blank"
+                                title="새창열림">
+                                Swiper Parallax 효과 응용 2 [세로] (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/abjWGye" class="link" target="_blank"
+                                title="새창열림">
+                                Swiper 리사이즈시 화면 크기에 따라 적용 & 해제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/yLqbjZw" class="link" target="_blank"
+                                title="새창열림">
+                                Swiper 슬라이드 자동 무한 롤링 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">자체제작 슬라이드</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/XWJeJVj" class="link" target="_blank"
+                                title="새창열림">
+                                좌우, 페이지 버튼식 슬라이드 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/YzPdqxj" class="link" target="_blank"
+                                title="새창열림">
+                                슬라이드 응용 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/VwYONjG" class="link" target="_blank"
+                                title="새창열림">
+                                세로 슬라이드 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/xxGxeaE" class="link" target="_blank"
+                                title="새창열림">
+                                마우스 휠 스크롤 슬라이드 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/vYOywwB" class="link" target="_blank"
+                                title="새창열림">
+                                페이지 표시 슬라이드 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/RwPqVGW" class="link" target="_blank"
+                                title="새창열림">
+                                특정 요소 크기에 맞추는 슬라이드 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="accordion-item">
+                <a href="#" class="item-button">
+                    <span class="accordion-name"><i class="xi-apps icon"></i>JS 기타</span>
+                </a>
+                <div class="accordion-desc">
+                    <strong class="desc-title">자바스크립트 라이브러리(jQuery 등)를 같이 이용해 구현한 코드 &amp; 사이트</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/eYGmyOz" class="link" target="_blank"
+                                title="새창열림">
+                                이미지 팝업 접근성 준수 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/WNrzWVK" class="link" target="_blank"
+                                title="새창열림">
+                                jQuery newsticker (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/NWygPJx" class="link" target="_blank"
+                                title="새창열림">
+                                제이쿼리 탭메뉴 기능 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/xxYrbBj" class="link" target="_blank"
+                                title="새창열림">
+                                제이쿼리 아코디언 메뉴 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/MWwjgwE" class="link" target="_blank"
+                                title="새창열림">
+                                jQuery 애니메이션 효과 모음 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/VwevwXQ" class="link" target="_blank"
+                                title="새창열림">
+                                [날짜표시 기능 사용 예시] datetimepicker vs datepicker (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.kipf.re.kr/30th/Anniversary_Video.do" class="link" target="_blank"
+                                title="새창열림">
+                                유튜브 아이프레임 동영상 자동 재생
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.djjunggu.go.kr/health/sub02_07.do" class="link" target="_blank"
+                                title="새창열림">
+                                Form 관련(특정 값에 따라 url 호출)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="http://www.seocheon.go.kr/tour/sub02_02_02.do" class="link" target="_blank"
+                                title="새창열림">
+                                카카오 지도 중심좌표, 마커위치 다르게 적용
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://borago.gonet.co.kr/nubija/web/html/index.html" class="link" target="_blank"
+                                title="새창열림">
+                                Splitting.js &amp; logoplay.js(로티 애니메이션) 예시
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://naver.github.io/egjs/" class="link" target="_blank" title="새창열림">
+                                jQuery 기반 UI 상호작용, 효과, 유틸리티 구성요소 라이브러리
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://masonry.desandro.com/" class="link" target="_blank" title="새창열림">
+                                Masonry 빈공간 찾아들어가는 배열 배치 기능1
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/e-oj/Magic-Grid" class="link" target="_blank" title="새창열림">
+                                Magic Grid 빈공간 찾아들어가는 배열 배치 기능2
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://lokeshdhakar.com/projects/lightbox2/" class="link" target="_blank"
+                                title="새창열림">
+                                이미지 레이어 팝업 플러그인1 [Lightbox2]
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/NWqOrzQ" class="link" target="_blank"
+                                title="새창열림">
+                                이미지 레이어 팝업 플러그인1 [Lightbox2] 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://feimosi.github.io/baguetteBox.js/" class="link" target="_blank"
+                                title="새창열림">
+                                이미지 레이어 팝업 플러그인2 [baguetteBox]
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/QWQzvOe" class="link" target="_blank"
+                                title="새창열림">
+                                이미지 레이어 팝업 플러그인3 [Photoswipe] 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://listjs.com/" class="link" target="_blank" title="새창열림">
+                                리스트, 테이블, 그 외에 검색, 정렬, 필터 등 유연성을 추가하는 라이브러리
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/SodhanaLibrary/jqGifPreview" class="link" target="_blank"
+                                title="새창열림">
+                                sns에서 볼 수 있는 GIF 미리보기 기능
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/fonstok/jfMagnify" class="link" target="_blank" title="새창열림">
+                                화면 확대 효과 생성하는 라이브러리
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/MWzGygj" class="link" target="_blank"
+                                title="새창열림">
+                                beforeAfter 이미지 slide 기능 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/qBKrOVx" class="link" target="_blank"
+                                title="새창열림">
+                                Before & After 기능 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/JjoPPar" class="link" target="_blank"
+                                title="새창열림">
+                                모바일 사이드 바 예제 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/jOpxGxW" class="link" target="_blank"
+                                title="새창열림">
+                                video tag 동영상 재생 정지 상호작용 버튼 기능 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/BaYKPXm" class="link" target="_blank"
+                                title="새창열림">
+                                header gnb 탑메뉴 커스텀 Type1 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/XWZdPbL" class="link" target="_blank"
+                                title="새창열림">
+                                header gnb 탑메뉴 커스텀 Type2 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/YzjJgLL" class="link" target="_blank"
+                                title="새창열림">
+                                header gnb 탑메뉴 커스텀 Type3 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/xxJoaqe" class="link" target="_blank"
+                                title="새창열림">
+                                셀렉트박스 드롭다운 기능 (Selectbox Dropdown) (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/ExdNdJb" class="link" target="_blank"
+                                title="새창열림">
+                                자바스크립트 마우스 들어오고 나갈때 방향 계산 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">바닐라 자바스크립트 (Vanilla JS)</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/qBgLLOa" class="link" target="_blank"
+                                title="새창열림">
+                                탭메뉴 기능 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/LYqMMZx" class="link" target="_blank"
+                                title="새창열림">
+                                레이어 팝업 기능 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/MWQEJeV" class="link" target="_blank"
+                                title="새창열림">
+                                하드코딩 팝업 - 하루동안 보지 않기 기능 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/yLEoqoG" class="link" target="_blank"
+                                title="새창열림">
+                                Marquee 효과 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/VwaxZdR" class="link" target="_blank"
+                                title="새창열림">
+                                여러가지 종류의 좌표 찾기 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/vYGaQmP" class="link" target="_blank"
+                                title="새창열림">
+                                appendChild vs innerHTML (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/qBZJxLq" class="link" target="_blank"
+                                title="새창열림">
+                                substr vs substring / slice vs splice (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/rNemMPV" class="link" target="_blank"
+                                title="새창열림">
+                                D-day 계산 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/WNxaeNV" class="link" target="_blank"
+                                title="새창열림">
+                                자바스크립트 로딩 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/GRqxWmR" class="link" target="_blank"
+                                title="새창열림">
+                                siblings 기능 구현 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/poKjLOM" class="link" target="_blank"
+                                title="새창열림">
+                                객체 데이터를 이용한 HTML 태그 추가 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/LYZZYJo" class="link" target="_blank"
+                                title="새창열림">
+                                알고리즘 - CallStack (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/OJXXJBR" class="link" target="_blank"
+                                title="새창열림">
+                                알고리즘 - Queue (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/jOrROqR" class="link" target="_blank"
+                                title="새창열림">
+                                알고리즘 - 자료구조 : 조합 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/RwRzZwx" class="link" target="_blank"
+                                title="새창열림">
+                                알고리즘 - 자료구조 : 순열 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/WNaOyKJ" class="link" target="_blank"
+                                title="새창열림">
+                                header gnb 탑메뉴 커스텀 Type1 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/gOBRKdx" class="link" target="_blank"
+                                title="새창열림">
+                                header gnb 탑메뉴 커스텀 Type2 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/YzjJgLL" class="link" target="_blank"
+                                title="새창열림">
+                                header gnb 탑메뉴 커스텀 Type3 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/oNarPyV" class="link" target="_blank"
+                                title="새창열림">
+                                자바스크립트 - PC, 모바일 (아이폰 ios, 안드로이드) 기기 환경 구분하는 코드 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/gOQvXqK" class="link" target="_blank"
+                                title="새창열림">
+                                input type text 휴대전화 번호 양식, 날짜 양식에 맞게 입력되는 텍스트 입력창 기능 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/eYLodME" class="link" target="_blank"
+                                title="새창열림">
+                                자바스크립트 Input type File 파일명, 확장자만 나오게 커스텀 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/qBQGybQ" class="link" target="_blank"
+                                title="새창열림">
+                                마우스 커서 커스텀 - 마우스를 따라다니는 원형 Circle (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/Poxvdoj" class="link" target="_blank"
+                                title="새창열림">
+                                마우스 오버시 3D 카드 효과 - Mouse hover 3D Card Effect (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+
+                    <strong class="desc-title">기타</strong>
+                    <ul class="list-1st">
+                        <li>
+                            <a href="https://www.toptal.com/developers/keycode/escape" class="link" target="_blank"
+                                title="새창열림">
+                                자바스크립트 키보드 코드 확인
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://codepen.io/kimyangsun/pen/zYWMXqo" class="link" target="_blank"
+                                title="새창열림">
+                                타입스크립트 코드펜 템플릿 (코드펜)
+                                <i class="xi-external-link"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <script>
+        'use strict';
+
+        $(document).on('click', '.accordion-list .accordion-item > a', function (e) {
+            e.preventDefault();
+            var $this = $(this);
+            var target = $this.parent();
+            var description = $this.siblings('.accordion-desc');
+            var other = target.siblings('.accordion-item');
+            var otherDescription = other.find('.accordion-desc');
+            accordionToggle(target, description, other, otherDescription);
+        });
+
+        function accordionToggle(target, description, other, otherDescription) {
+            if (target.hasClass('active')) {
+                target.removeClass('active');
+                description.stop().slideUp(300);
+            } else {
+                target.addClass('active');
+                description.stop().slideDown(300);
+            }
+
+            if (other && otherDescription) {
+                other.removeClass('active');
+                otherDescription.stop().slideUp(300);
+            }
+        };
+    </script>
+</body>
+</html>

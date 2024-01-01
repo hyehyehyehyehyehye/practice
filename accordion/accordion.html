@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        #nav {
+            margin: 24px auto;
+            border-top: 1px solid #999;
+            border-right: 1px solid #999;
+            border-left: 1px solid #999;
+            width: 95%;
+        }
+
+        ul#nav {
+            padding: 0;
+        }
+
+        #nav li {
+            list-style: none;
+        }
+
+        #nav li a {
+            display: block;
+            padding: 10px 1%;
+            background: #ccc;
+            border-top: 1px solid #eee;
+            border-bottom: 1px solid #999;
+            text-decoration: none;
+            color: #000;
+        }
+
+        #nav li a:hover,
+        #nav li a.active {
+            background: #B3B3B3;
+            color: #F2F2F2;
+        }
+
+        #nav section {
+            display: none;
+            float: left;
+            background: #B3B3B3;
+            overflow: hidden;
+            padding: 1% 3% 0 3%;
+        }
+
+        .no-js #nav section {
+            display: block;
+        }
+
+        #nav li ul li a {
+            padding: 10px 25px;
+            border-bottom: 1px dotted #ccc;
+        }
+
+        @media only screen and (min-width: 30em) {
+            body {
+                margin: 0 auto;
+                padding: 0 2%;
+            }
+
+            #nav {
+                width: 95%;
+                border: none;
+            }
+
+            #nav li {
+                display: block;
+                padding: 0px;
+                border: none;
+            }
+
+            #nav li a {
+                float: left;
+                /* need to set height */
+                height: 250px;
+                border: none;
+                border-right: 1px solid #333;
+                width: 7%;
+            }
+
+            #nav section {
+                padding: 10px 1%;
+                width: 60%;
+                /* currently need to set height (same as li a) */
+                height: 250px;
+                border-right: 1px solid #333;
+                font-size: 18px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h2>반응형 세로형 & 가로형 아코디언</h2>
+
+
+    <ul id="nav">
+        <li><a href="#">Item 1</a>
+            <section>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras tincidunt pellentesque lorem, id
+                    suscipit dolor rutrum id. Morbi facilisis porta volutpat. Fusce adipiscing, mauris quis congue
+                    tincidunt, sapien purus suscipit odio, quis dictum odio tortor in sem. Ut sit amet libero nec orci
+                    mattis fringilla. Praesent eu ipsum in sapien tincidunt molestie sed ut magna. Nam accumsan dui at
+                    orci rhoncus pharetra tincidunt elit ullamcorper. Sed ac mauris ipsum. Nullam imperdiet sapien id
+                    purus pretium id aliquam mi ullamcorper.</p>
+            </section>
+        </li>
+        <li><a href="#">Item 2</a>
+            <section>
+                <p>Ut laoreet augue et neque pretium non sagittis nibh pulvinar. Etiam ornare tincidunt orci quis
+                    ultrices. Pellentesque ac sapien ac purus gravida ullamcorper. Duis rhoncus sodales lacus, vitae
+                    adipiscing tellus pharetra sed. Praesent bibendum lacus quis metus condimentum ac accumsan orci
+                    vulputate. Aenean fringilla massa vitae metus facilisis congue. Morbi placerat eros ac sapien semper
+                    pulvinar. Vestibulum facilisis, ligula a molestie venenatis, metus justo ullamcorper ipsum, congue
+                    aliquet dolor tortor eu neque. Sed imperdiet, nibh ut vestibulum tempor, nibh dui volutpat lacus,
+                    vel gravida magna justo sit amet quam. Quisque tincidunt ligula at nisl imperdiet sagittis. Morbi
+                    rutrum tempor arcu, non ultrices sem semper a. Aliquam quis sem mi.</p>
+            </section>
+        </li>
+        <li><a href="#">Item 3</a>
+            <section>
+                <p>Donec mattis mauris gravida metus laoreet non rutrum sem viverra. Aenean nibh libero, viverra vel
+                    vestibulum in, porttitor ut sapien. Phasellus tempor lorem id justo ornare tincidunt. Nulla
+                    faucibus, purus eu placerat fermentum, velit mi iaculis nunc, bibendum tincidunt ipsum justo eu
+                    mauris. Nulla facilisi. Vestibulum vel lectus ac purus tempus suscipit nec sit amet eros. Nullam
+                    fringilla, enim eu lobortis dapibus, quam magna tincidunt nibh, sit amet imperdiet dolor justo
+                    congue turpis.</p>
+            </section>
+        </li>
+        <li><a href="#">Item 4</a>
+            <section>
+                <p>Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Phasellus dui
+                    urna, mollis vel suscipit in, pharetra at ligula. Pellentesque a est vel est fermentum pellentesque
+                    sed sit amet dolor. Nunc in dapibus nibh. Aliquam erat volutpat. Phasellus vel dui sed nibh iaculis
+                    convallis id sit amet urna. Proin nec tellus quis justo consequat accumsan. Vivamus turpis enim,
+                    auctor eget placerat eget, aliquam ut sapien.</p>
+            </section>
+        </li>
+    </ul>
+
+    <script src='https://code.jquery.com/jquery-3.7.1.min.js'></script>
+    <script>
+
+        $(document).ready(function () {
+
+            $('#nav').children('li').first().children('a').addClass('active')
+                .next().addClass('is-open').show();
+
+            $('#nav').on('click', 'li > a', function () {
+
+                if (!$(this).hasClass('active')) {
+
+                    $('#nav .is-open').removeClass('is-open').hide();
+                    $(this).next().toggleClass('is-open').toggle();
+
+                    $('#nav').find('.active').removeClass('active');
+                    $(this).addClass('active');
+                } else {
+                    $('#nav .is-open').removeClass('is-open').hide();
+                    $(this).removeClass('active');
+                }
+            });
+        });
+
+    </script>
+</body>
+</html>
